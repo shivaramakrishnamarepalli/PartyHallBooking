@@ -2,3 +2,21 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add your desired box shadow */
   transform: translateY(-2px); /* Add your desired transformation */
 }
+
+.custom-login-btn {
+  background-color: gray;
+  color: white;
+}
+
+.custom-login-btn:hover {
+  background-color: darkblue;
+  border-color: rgb(9, 133, 181);
+  color: white;
+}
+
+
+
+.nav-link.active:hover {
+  text-decoration: underline;
+  color: black
+}

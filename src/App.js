@@ -5,6 +5,8 @@ import EditAndDeleteHall from "./components/EditAndDeleteHall";
 import RequestToAddHall from "./components/RequestToAddHall";
 import SpecificCard from "./components/SpecificCard";
 import HallForm from "./components/HallForm";
+import Login from "./components/Login";
+import Home from "./components/Home";
 function App() {
   return (
     <>
@@ -12,10 +14,17 @@ function App() {
       {/* <CardsDisplay /> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/cards" element={<CardsDisplay />} />
-          <Route path="/admin/edit" element={<EditAndDeleteHall />} />
-          <Route path="/admin/add" element={<HallForm />} />
-          <Route path="/user/hall/:id" element={<SpecificCard />} />
+
+          {/* common routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Login />} />
+          <Route path="*" element={<>default page</>} />
+
+          {/* user routes */}
+          <Route path="/user/home" element={<Home />} />
+          
+
+
         </Routes>
       </BrowserRouter>
     </>
