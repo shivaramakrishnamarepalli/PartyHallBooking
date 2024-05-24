@@ -1,6 +1,8 @@
 import './App.css'
 import CardsDisplay from './components/CardsDisplay'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import EditAndDeleteHall from './components/EditAndDeleteHall'
+import RequestToAddHall from './components/RequestToAddHall'
 function App() {
   return (
     <>
@@ -9,8 +11,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/cards" element={<CardsDisplay />} />
-          <Route path="/admin/editHall" element={<EditAndDelteHall />} />
-          <Route path="/admin/addHall" element={<RequestToAddHall />} />
+          <Route path="/admin/edit" element={<EditAndDeleteHall />} />
+          <Route path="/admin/add" element={<RequestToAddHall />} />
         </Routes>
       </BrowserRouter>
     </>
