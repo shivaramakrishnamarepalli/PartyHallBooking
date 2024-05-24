@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const RequestToAddHall = () => {
+const HallForm = () => {
   const [formData, setFormData] = useState({
     hall_id: '',
     hall_name: '',
@@ -15,19 +15,46 @@ const RequestToAddHall = () => {
     hall_rating: '',
   })
 
+  const [errors, setErrors] = useState({
+    hall_id: '',
+    hall_name: '',
+    hall_address: '',
+    admin_id: '',
+    status: '',
+    hall_rental_cost: '',
+    hall_max_capacity: '',
+    hall_price_plate: '',
+    hall_catering: '',
+    hall_duration: '',
+    hall_rating: '',
+  })
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+    // Reset error message when user starts typing
+    setErrors({ ...errors, [name]: '' })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(formData)
+    let hasError = false
+    const newErrors = { ...errors }
+
     // Check if all fields are filled
     for (const key in formData) {
       if (formData[key] === '') {
-        alert('Please fill out all fields')
-        return
+        newErrors[key] = 'This field is required'
+        hasError = true
       }
     }
+
+    if (hasError) {
+      setErrors(newErrors)
+      return
+    }
+
     // Handle form submission if all fields are filled
     console.log(formData)
   }
@@ -44,8 +71,10 @@ const RequestToAddHall = () => {
           onChange={handleChange}
           value={formData.hall_id}
         />
+        {errors.hall_id && (
+          <small className="text-danger">{errors.hall_id}</small>
+        )}
       </div>
-      {/* Add other form groups for each field */}
       <div className="form-group">
         <label htmlFor="hall_name">Hall Name</label>
         <input
@@ -56,6 +85,9 @@ const RequestToAddHall = () => {
           onChange={handleChange}
           value={formData.hall_name}
         />
+        {errors.hall_name && (
+          <small className="text-danger">{errors.hall_name}</small>
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="hall_address">Hall Address</label>
@@ -67,6 +99,9 @@ const RequestToAddHall = () => {
           onChange={handleChange}
           value={formData.hall_address}
         />
+        {errors.hall_address && (
+          <small className="text-danger">{errors.hall_address}</small>
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="admin_id">Admin ID</label>
@@ -78,6 +113,9 @@ const RequestToAddHall = () => {
           onChange={handleChange}
           value={formData.admin_id}
         />
+        {errors.admin_id && (
+          <small className="text-danger">{errors.admin_id}</small>
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="status">Status</label>
@@ -89,73 +127,11 @@ const RequestToAddHall = () => {
           onChange={handleChange}
           value={formData.status}
         />
+        {errors.status && (
+          <small className="text-danger">{errors.status}</small>
+        )}
       </div>
-      <div className="form-group">
-        <label htmlFor="hall_rental_cost">Hall Rental Cost</label>
-        <input
-          type="text"
-          className="form-control"
-          id="hall_rental_cost"
-          name="hall_rental_cost"
-          onChange={handleChange}
-          value={formData.hall_rental_cost}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="hall_max_capacity">Hall Max Capacity</label>
-        <input
-          type="text"
-          className="form-control"
-          id="hall_max_capacity"
-          name="hall_max_capacity"
-          onChange={handleChange}
-          value={formData.hall_max_capacity}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="hall_price_plate">Hall Price Per Plate</label>
-        <input
-          type="text"
-          className="form-control"
-          id="hall_price_plate"
-          name="hall_price_plate"
-          onChange={handleChange}
-          value={formData.hall_price_plate}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="hall_catering">Hall Catering</label>
-        <input
-          type="text"
-          className="form-control"
-          id="hall_catering"
-          name="hall_catering"
-          onChange={handleChange}
-          value={formData.hall_catering}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="hall_duration">Hall Duration</label>
-        <input
-          type="text"
-          className="form-control"
-          id="hall_duration"
-          name="hall_duration"
-          onChange={handleChange}
-          value={formData.hall_duration}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="hall_rating">Hall Rating</label>
-        <input
-          type="text"
-          className="form-control"
-          id="hall_rating"
-          name="hall_rating"
-          onChange={handleChange}
-          value={formData.hall_rating}
-        />
-      </div>
+      {/* Add other form groups for each field */}
       <button type="submit" className="btn btn-primary">
         Submit
       </button>
@@ -163,4 +139,4 @@ const RequestToAddHall = () => {
   )
 }
 
-export default RequestToAddHall
+export default HallForm
