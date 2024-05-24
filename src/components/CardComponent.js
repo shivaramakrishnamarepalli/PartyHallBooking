@@ -3,29 +3,47 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/index.css";
 import rating1 from "../images/rating1.png";
 import addressIcon from "../images/address-icon.png";
-import { FaRupeeSign } from "react-icons/fa";
-import { FaBuilding } from "react-icons/fa";
-import { IoPerson } from "react-icons/io";
+import { FaRupeeSign, FaBuilding } from "react-icons/fa";
+import { IoPerson } from "react-icons/io5"; // Update the import here
 import { useNavigate } from "react-router-dom";
-function Card({ imageUrl, id, name, address, rental_cost, rating, capacity }) {
-  const navigate = useNavigate();
+import { useEffect, useState } from "react";
 
+function Card({ id, name, address, rental_cost, rating, capacity }) {
+  const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/user/hall/${id}`);
   };
+  async function displayImage() {
+    try {
+      const hall_id = id;
+      if (hall_id == null)
+        document.getElementById("uploadStatus").innerText =
+          "Error viewing image. Try correcting the hall id";
+      const response = await fetch(
+        `http://localhost:3006/api/user/image/${hall_id}`
+      );
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        document.getElementById("displayImage").src = url;
+      } else {
+        console.error("Failed to fetch image:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
+  }
+  displayImage();
 
   return (
     <>
-      {}
-      <div
-        className="card p-3 m-5 border-0 card-hover "
-        style={{ width: "25rem" }}
-      >
+      <div className="card p-3 m-5 border-0 card-hover" style={{ width: "25rem" }}>
         <img
+          id="displayImage"
           onClick={handleClick}
           src={img_path}
           className="card-img-top img-fluid"
-          alt="..."
+          alt={name}
           width={"10px"}
         />
         <div className="card-body">
@@ -33,51 +51,35 @@ function Card({ imageUrl, id, name, address, rental_cost, rating, capacity }) {
             <div className="d-flex justify-content-between">
               <span>
                 <h5>
-                  <FaBuilding />
-                  {name}
+                  <FaBuilding /> {name}
                 </h5>
               </span>
               <span>
-                {" "}
                 <h5>
-                  <img src={rating1} width={"22rem"} />
+                  <img src={rating1} width={"22rem"} alt="rating" />
                   <span> {rating + ".0"}</span>
                 </h5>
               </span>
             </div>
             <div>
               <span>
-                <img src={addressIcon} width={"22rem"} />
+                <img src={addressIcon} width={"22rem"} alt="address icon" />
                 {address}
               </span>
             </div>
             <div className="d-flex justify-content-between">
               <span>
-                {" "}
-                <FaRupeeSign />
-                {rental_cost}
+                <FaRupeeSign /> {rental_cost}
               </span>
               <span>
-                {/* <IoPerson /> */}
-                {capacity}
+                <IoPerson /> {capacity}
               </span>
             </div>
           </p>
         </div>
       </div>
-      {/* <div className="card p-3 m-3" style={{ width: '22rem' }}>
-        <img src={imageUrl} className="card-img-top" alt={name} />
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
-          <p className="card-text">1{location}</p>
-          <p className="card-text">1{rentalCost}</p>
-          <p className="card-text">2{maxCapacity}</p>
-        </div>
-        <div className="card-footer">
-          <button className="btn btn-primary">Book Now</button>
-        </div> 
-      </div>*/}
     </>
   );
 }
+
 export default Card;

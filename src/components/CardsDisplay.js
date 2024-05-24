@@ -20,26 +20,6 @@ function CardsDisplay() {
     fetchHalls();
   }, []);
 
-  async function displayImage(hall_id) {
-    try {
-      if (hall_id == null)
-        document.getElementById("uploadStatus").innerText =
-          "Error viewing image. Try correcting the hall id";
-      const response = await fetch(
-        `http://localhost:3006/api/user/image/${hall_id}`
-      );
-      if (response.ok) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        return url;
-      } else {
-        console.error("Failed to fetch image:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }
-
   return (
     <>
       <h1>cards display</h1>
@@ -53,7 +33,7 @@ function CardsDisplay() {
           rating={hall.hall_rating}
           capacity={hall.hall_max_capacity}
           id={hall.hall_id}
-          image={displayImage(hall.hall_id)}
+          imageData={hall.hall_image}
         />
       ))}
     </>
