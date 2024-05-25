@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../styles/editHall.css";
+import axios from "axios";
+
 const HallForm = () => {
   const [formData, setFormData] = useState({
     hall_id: "",
@@ -10,9 +12,9 @@ const HallForm = () => {
     hall_rental_cost: "",
     hall_max_capacity: "",
     hall_price_plate: "",
-    hall_catering: "",
     hall_duration: "",
     hall_rating: "",
+    hall_image: "",
   });
 
   const [errors, setErrors] = useState({
@@ -24,9 +26,9 @@ const HallForm = () => {
     hall_rental_cost: "",
     hall_max_capacity: "",
     hall_price_plate: "",
-    hall_catering: "",
     hall_duration: "",
     hall_rating: "",
+    hall_image: "",
   });
 
   const handleChange = (e) => {
@@ -36,7 +38,7 @@ const HallForm = () => {
     setErrors({ ...errors, [name]: "" });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     let hasError = false;
@@ -46,6 +48,7 @@ const HallForm = () => {
     for (const key in formData) {
       if (formData[key] === "") {
         newErrors[key] = "This field is required";
+        console.log("This field is required", key);
         hasError = true;
       }
     }
@@ -56,8 +59,74 @@ const HallForm = () => {
     }
 
     // Handle form submission if all fields are filled
-    console.log(formData);
+    const token = localStorage.getItem("token");
+    await axios
+      .post(
+        "http://localhost:3006/api/admin/addHall",
+        {
+          ...formData,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res, "succ");
+      })
+      .catch((err) => {
+        console.log(err, "err");
+      });
+
+    // await uploadImage();
   };
+
+  async function uploadImage() {
+    console.log("hi");
+    if (formData.hall_id == null)
+      document.getElementById("uploadStatus").innerText =
+        "Error viewing image. Try correcting the hall id";
+
+    const fileInput = document.getElementById("imageInput");
+    const file = fileInput.files[0];
+    console.log(file, "file");
+
+    if (!file) {
+      document.getElementById("uploadStatus").innerText =
+        "Please select an image file.";
+      return;
+    }
+
+    const formData1 = new FormData();
+    formData1.append("image", file);
+    setFormData({ ...formData, hall_image: formData1 });
+    console.log(formData1);
+
+    // try {
+    //   const response = await fetch(
+    //     `http://localhost:3006/api/user/uploadImage/${formData.hall_id}`,
+    //     {
+    //       method: "POST",
+    //       body: formData1,
+    //     }
+    //   );
+
+    //   if (response.ok) {
+    //     console.log("uploaded image");
+    //     document.getElementById("uploadStatus").innerText =
+    //       "Image uploaded successfully!";
+    //     // Update displayed image after successful upload
+    //   } else {
+    //     document.getElementById("uploadStatus").innerText =
+    //       "Error uploading image.";
+    //   }
+    // } catch (error) {
+    //   console.error("Error uploading image:", error);
+    //   document.getElementById("uploadStatus").innerText =
+    //     "Error uploading image.";
+    // }
+  }
 
   return (
     <div
@@ -85,6 +154,14 @@ const HallForm = () => {
             {errors.hall_id && (
               <small className="text-danger">{errors.hall_id}</small>
             )}
+          </div>
+          <div>
+            <label htmlFor="hall_id">Upload your hall Image</label>
+            <input type="file" id="imageInput" />
+            <button type="button" onClick={() => uploadImage()}>
+              Upload Image
+            </button>
+            <p id="uploadStatus"></p>
           </div>
           <div className="form-group p-1">
             <label htmlFor="hall_name">Hall Name</label>

@@ -23,7 +23,7 @@ function App() {
           {/* user routes */}
           <Route path="/user/home" element={<HomeComponent />} />
           <Route path="/user/hall/:id" element={<SpecificCard />} />
-
+          <Route path="/admin/addHall" element={<HallForm />} />
         </Routes>
       </BrowserRouter>
     </>
