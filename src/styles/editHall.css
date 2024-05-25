@@ -28,6 +28,7 @@ h2 {
 .form-label {
   font-weight: 600;
   color: #495057;
+  display: block;
   font-size: 0.875rem; /* Smaller font size */
 }
 
@@ -37,7 +38,12 @@ h2 {
   padding: 5px 10px; /* Smaller padding */
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   font-size: 0.875rem; /* Smaller font size */
+  box-sizing: border-box;
 }
+.full-width {
+  width: 100%;
+}
+
 
 .form-control:focus {
   border-color: #80bdff;

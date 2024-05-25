@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Dropdown, DropdownButton } from 'react-bootstrap';
 // import spvLogo from '../spv.jpg'
 import '../styles/index.css'
 function Navbar1(){
@@ -26,7 +27,18 @@ function Navbar1(){
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn custom-login-btn" type="submit" >Login</button>
+              {/* <button class="btn custom-login-btn" type="submit" >Login</button> */}
+              <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+                 </a>
+                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                   <a class="dropdown-item" href="#">Action</a>
+               <a class="dropdown-item" href="#">Another action</a>
+               <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+               </div>
+               </li>
             </form>
           </div>
         </div>

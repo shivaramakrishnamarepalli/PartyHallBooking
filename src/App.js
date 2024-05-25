@@ -7,6 +7,8 @@ import SpecificCard from "./components/SpecificCard";
 import HallForm from "./components/HallForm";
 import Login from "./components/Login";
 import HomeComponent from "./components/HomeComponent";
+import CenterSpecificHall from './components/CenterSpecificHall'
+import Home from './components/Home'
 function App() {
   return (
     <>
@@ -14,7 +16,7 @@ function App() {
       {/* <CardsDisplay /> */}
       <BrowserRouter>
         <Routes>
-
+          <Route path="/home" element={<Home/>}/>
           {/* common routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
@@ -22,8 +24,9 @@ function App() {
 
           {/* user routes */}
           <Route path="/user/home" element={<HomeComponent />} />
-          <Route path="/user/hall/:id" element={<SpecificCard />} />
+          <Route path="/user/hall/:id" element={<CenterSpecificHall />} />
           <Route path="/admin/addHall" element={<HallForm />} />
+          {/* <Route path="admin/home" element={<Home/>}/> */}
         </Routes>
       </BrowserRouter>
     </>
