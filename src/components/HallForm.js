@@ -60,6 +60,7 @@ const HallForm = () => {
 
     // Handle form submission if all fields are filled
     const token = localStorage.getItem("token");
+    console.log(formData, "63");
     await axios
       .post(
         "http://localhost:3006/api/admin/addHall",
@@ -79,7 +80,7 @@ const HallForm = () => {
         console.log(err, "err");
       });
 
-    // await uploadImage();
+    await uploadImage();
   };
 
   async function uploadImage() {
@@ -103,29 +104,29 @@ const HallForm = () => {
     setFormData({ ...formData, hall_image: formData1 });
     console.log(formData1);
 
-    // try {
-    //   const response = await fetch(
-    //     `http://localhost:3006/api/user/uploadImage/${formData.hall_id}`,
-    //     {
-    //       method: "POST",
-    //       body: formData1,
-    //     }
-    //   );
+    try {
+      const response = await fetch(
+        `http://localhost:3006/api/user/uploadImageReq/${formData.hall_id}`,
+        {
+          method: "POST",
+          body: formData1,
+        }
+      );
 
-    //   if (response.ok) {
-    //     console.log("uploaded image");
-    //     document.getElementById("uploadStatus").innerText =
-    //       "Image uploaded successfully!";
-    //     // Update displayed image after successful upload
-    //   } else {
-    //     document.getElementById("uploadStatus").innerText =
-    //       "Error uploading image.";
-    //   }
-    // } catch (error) {
-    //   console.error("Error uploading image:", error);
-    //   document.getElementById("uploadStatus").innerText =
-    //     "Error uploading image.";
-    // }
+      if (response.ok) {
+        console.log("uploaded image");
+        document.getElementById("uploadStatus").innerText =
+          "Image uploaded successfully!";
+        // Update displayed image after successful upload
+      } else {
+        document.getElementById("uploadStatus").innerText =
+          "Error uploading image.";
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      document.getElementById("uploadStatus").innerText =
+        "Error uploading image.";
+    }
   }
 
   return (
@@ -158,9 +159,7 @@ const HallForm = () => {
           <div>
             <label htmlFor="hall_id">Upload your hall Image</label>
             <input type="file" id="imageInput" />
-            <button type="button" onClick={() => uploadImage()}>
-              Upload Image
-            </button>
+            <button type="button">Upload Image</button>
             <p id="uploadStatus"></p>
           </div>
           <div className="form-group p-1">
