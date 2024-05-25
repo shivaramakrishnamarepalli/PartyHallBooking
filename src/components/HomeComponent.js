@@ -1,10 +1,10 @@
 import Navbar  from "./Navbar"
 import Center from "./Center"
 
-function Home(){
+function HomeComponent(){
     return (<>
         <Navbar />
         <Center />
     </>)
 }
-export default Home
+export default HomeComponent

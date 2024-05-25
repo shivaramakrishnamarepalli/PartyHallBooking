@@ -6,7 +6,7 @@ import RequestToAddHall from "./components/RequestToAddHall";
 import SpecificCard from "./components/SpecificCard";
 import HallForm from "./components/HallForm";
 import Login from "./components/Login";
-import Home from "./components/Home";
+import HomeComponent from "./components/HomeComponent";
 function App() {
   return (
     <>
@@ -21,9 +21,8 @@ function App() {
           <Route path="*" element={<>default page</>} />
 
           {/* user routes */}
-          <Route path="/user/home" element={<Home />} />
-          
-
+          <Route path="/user/home" element={<HomeComponent />} />
+          <Route path="/user/hall/:id" element={<SpecificCard />} />
 
         </Routes>
       </BrowserRouter>
