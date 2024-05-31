@@ -3,9 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import axios from "axios";
 
-
 function SpecificCard() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [bookedDate, setBookedDate] = useState("");
   const [numGuests, setNumGuests] = useState("");
   const [eventType, setEventType] = useState("");
@@ -83,14 +82,14 @@ function SpecificCard() {
           },
         }
       )
-      .then(res => {
+      .then((res) => {
         alert("Booking Successful");
-        navigate('/user/booking')
-      }).catch(err => {
-        alert("Hall is already booked")
+        navigate(`/user/bookings`);
+      })
+      .catch((err) => {
+        alert("Hall is already booked");
         // console.log(alert("Booking failed"));
       });
-      
   };
 
   return (
@@ -147,43 +146,43 @@ function SpecificCard() {
         </div>
       </div>
       <div id="book-now" className="container">
-  <h3>Book Your Hall Now!!</h3>
-  <form onSubmit={(e) => bookHall(e)}>
-    <label className="booked-date p-2 form-label">
-      Booked Date:
-      <input
-        type="date"
-        value={bookedDate}
-        onChange={(e) => setBookedDate(e.target.value)}
-        required
-        className="m-1 form-control full-width"
-      />
-    </label>
-    <label className="p-2 form-label">
-      Number of Guests:
-      <input
-        type="number"
-        value={numGuests}
-        onChange={(e) => setNumGuests(e.target.value)}
-        required
-        className="m-1 form-control full-width"
-      />
-    </label>
-    <label className="p-2 form-label">
-      Event Type:
-      <input
-        type="text"
-        value={eventType}
-        onChange={(e) => setEventType(e.target.value)}
-        required
-        className="m-1 form-control full-width"
-      />
-    </label>
-   
-    {/* <input type="submit" value="Submit" className="btn btn-primary m-1 "/> */}
-    <Button >Book hall</Button>
-  </form>
-</div>
+        <h3>Book Your Hall Now!!</h3>
+        <form onSubmit={(e) => bookHall(e)}>
+          <label className="booked-date p-2 form-label">
+            Booked Date:
+            <input
+              type="date"
+              value={bookedDate}
+              onChange={(e) => setBookedDate(e.target.value)}
+              required
+              className="m-1 form-control full-width"
+            />
+          </label>
+          <label className="p-2 form-label">
+            Number of Guests:
+            <input
+              type="number"
+              value={numGuests}
+              onChange={(e) => setNumGuests(e.target.value)}
+              required
+              className="m-1 form-control full-width"
+            />
+          </label>
+          <label className="p-2 form-label">
+            Event Type:
+            <input
+              type="text"
+              value={eventType}
+              onChange={(e) => setEventType(e.target.value)}
+              required
+              className="m-1 form-control full-width"
+            />
+          </label>
+
+          {/* <input type="submit" value="Submit" className="btn btn-primary m-1 "/> */}
+          <Button>Book hall</Button>
+        </form>
+      </div>
       <div id="Reviews"></div>
     </div>
   );

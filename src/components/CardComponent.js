@@ -4,7 +4,7 @@ import "../styles/index.css";
 import rating1 from "../images/rating1.png";
 import addressIcon from "../images/address-icon.png";
 import { FaRupeeSign, FaBuilding } from "react-icons/fa";
-import { IoPerson } from "react-icons/io5"; 
+import { IoPerson } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -18,7 +18,9 @@ function Card({ id, name, address, rental_cost, rating, capacity }) {
     async function displayImage() {
       try {
         const hall_id = id;
-        const response = await fetch(`http://localhost:3006/api/user/image/${hall_id}`);
+        const response = await fetch(
+          `http://localhost:3006/api/user/image/${hall_id}`
+        );
         if (response.ok) {
           const blob = await response.blob();
           const url = URL.createObjectURL(blob);
@@ -34,7 +36,10 @@ function Card({ id, name, address, rental_cost, rating, capacity }) {
   }, [id]);
 
   return (
-    <div className="card p-3 m-5 border-0 card-hover" style={{ width: "25rem" }}>
+    <div
+      className="card p-3 m-5 border-0 card-hover"
+      style={{ width: "25rem" }}
+    >
       <img
         id={`displayImage-${id}`}
         onClick={handleClick}
@@ -54,7 +59,7 @@ function Card({ id, name, address, rental_cost, rating, capacity }) {
             <span>
               <h5>
                 <img src={rating1} width={"22rem"} alt="rating" />
-                <span> {rating + ".0"}</span>
+                <span> {rating}</span>
               </h5>
             </span>
           </div>
