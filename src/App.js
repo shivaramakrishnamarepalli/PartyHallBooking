@@ -10,6 +10,8 @@ import HomeComponent from "./components/HomeComponent";
 import CenterSpecificHall from "./components/CenterSpecificHall";
 import Home from "./components/Home";
 import UserBookings from "./components/UserBookings";
+import RoleSelection from "./components/RoleSelection";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       {/* <CardsDisplay /> */}
       <BrowserRouter>
         <Routes>
+          <Route path="*" element={<RoleSelection />} />
+          <Route path="/role" element={<RoleSelection />} />
           <Route path="/home" element={<Home />} />
           {/* common routes */}
           <Route path="/login" element={<Login />} />
@@ -30,8 +34,17 @@ function App() {
           <Route path="/user/bookings" element={<UserBookings />} />
 
           {/* admin routes */}
-          {/* <Route path="admin/home" element={<Home/>}/> */}
-          <Route path="/admin/addHall" element={<HallForm />} />
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute>
+                <Routes>
+                  {/* <Route path="admin/home" element={<Home/>}/> */}
+                  <Route path="/addHall" element={<HallForm />} />
+                </Routes>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
