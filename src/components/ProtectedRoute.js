@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const ProtectedRoute = ({ element: Element, ...rest }) => {
+const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
   const userRole = localStorage.getItem("userRole");
 
@@ -13,7 +13,7 @@ const ProtectedRoute = ({ element: Element, ...rest }) => {
     }
   }, [navigate, userRole]);
 
-  return userRole === "admin" ? <Element {...rest} /> : null;
+  return userRole === "admin" ? children : <div>Access denied</div>;
 };
 
 export default ProtectedRoute;
