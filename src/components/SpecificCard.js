@@ -65,6 +65,15 @@ function SpecificCard() {
     const user_id = localStorage.getItem("user_id");
     const token = localStorage.getItem("token");
 
+    const today = new Date();
+
+    if (bookedDate > today) {
+      console.log("The booked date is after today's date.");
+    } else {
+      alert("please choose a valid date!");
+      return;
+    }
+
     await axios
       .post(
         `http://localhost:3006/api/user/bookHall/${id}`,

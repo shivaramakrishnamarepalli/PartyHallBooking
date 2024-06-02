@@ -14,7 +14,7 @@ const HallForm = () => {
     hall_price_plate: "",
     hall_duration: "",
     hall_rating: "",
-    hall_image: "",
+    // hall_image: "",
   });
 
   const [errors, setErrors] = useState({
@@ -28,7 +28,7 @@ const HallForm = () => {
     hall_price_plate: "",
     hall_duration: "",
     hall_rating: "",
-    hall_image: "",
+    // hall_image: "",
   });
 
   const handleChange = (e) => {
