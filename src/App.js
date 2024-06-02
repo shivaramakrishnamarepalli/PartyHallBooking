@@ -40,7 +40,7 @@ function App() {
               <ProtectedRoute>
                 <Routes>
                   {/* <Route path="admin/home" element={<Home/>}/> */}
-                  <Route path="/addHall" element={<HallForm />} />
+                  <Route path="addHall" element={<HallForm />} />
                 </Routes>
               </ProtectedRoute>
             }

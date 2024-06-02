@@ -25,7 +25,7 @@ const Login = () => {
     navigate(`/admin/addHall`);
   };
 
-  const handleLogin = async (userid = "", userpass = "") => {
+  const handleLogin = async () => {
     let userRole = localStorage.getItem("userRole");
     console.log(userRole);
     if (userRole === "admin") {
@@ -95,9 +95,10 @@ const Login = () => {
       const userId = generateUserId();
 
       let userRole = localStorage.getItem("userRole");
+      console.log(userRole);
       if (userRole === "admin") {
         const response = await axios.post(
-          "http://localhost:3006/api/user/signup",
+          "http://localhost:3006/api/admin/signup",
           {
             admin_name: user_name,
             admin_email: user_email,
@@ -110,10 +111,12 @@ const Login = () => {
         const { token } = response.data;
         localStorage.setItem("user_id", userId);
         localStorage.setItem("token", token);
-        alert("Signup successful.");
 
-        alert(`Signup successful! Login with you new id is "${userId}"`);
-        handleMoveAdmin();
+        alert(`Signup successful! Login with you new id "${userId}"`);
+
+        setUserId(userId);
+        setPassword(user.user_password);
+        setSignupFormVisible(false);
         return;
       }
 
@@ -125,11 +128,15 @@ const Login = () => {
       const { token } = response.data;
       localStorage.setItem("user_id", userId);
       localStorage.setItem("token", token);
-      alert("Signup successful.");
       // Redirect or perform any necessary actions upon successful signup
 
       // Automatically log in after signup
-      handleLogin(userId, user_password);
+      setSignupFormVisible(false);
+      setUserId(userId);
+      setPassword(user.user_password);
+
+      alert(`Signup successful! Login with you new id "${userId}"`);
+      return;
     } catch (error) {
       console.error("Error signing up:", error);
       alert("Error signing up. Please try again.");

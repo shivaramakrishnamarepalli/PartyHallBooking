@@ -26,11 +26,8 @@ function Card({ id, name, address, rental_cost, rating, capacity }) {
           const url = URL.createObjectURL(blob);
           document.getElementById(`displayImage-${id}`).src = url;
         } else {
-          console.error("Failed to fetch image:", response.statusText);
         }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
+      } catch (error) {}
     }
     displayImage();
   }, [id]);
