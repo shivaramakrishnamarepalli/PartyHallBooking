@@ -14,9 +14,15 @@
   color: white;
 }
 
+.navbar-nav .nav-link {
+  transition: color 0.3s ease; /* Apply transition for color change */
+}
 
+.navbar-nav .nav-link:hover {
+  color: #ff0000; /* Change color on hover */
+}
 
 .nav-link.active:hover {
   text-decoration: underline;
-  color: black
+  color: black;
 }

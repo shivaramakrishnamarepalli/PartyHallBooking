@@ -2,7 +2,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import { Dropdown, DropdownButton } from 'react-bootstrap';
 // import spvLogo from '../spv.jpg'
 import "../styles/index.css";
+import { Link, useNavigate } from "react-router-dom";
 function Navbar1() {
+  const navigate = useNavigate();
+  function handleRole() {
+    navigate("/");
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg  bg-body-secondary ">
@@ -24,19 +29,19 @@ function Navbar1() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link className="nav-link active" aria-current="page" to="#">
                   HOME
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link className="nav-link active" aria-current="page" to="#">
                   ABOUT
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link className="nav-link active" aria-current="page" to="#">
                   CONTACT
-                </a>
+                </Link>
               </li>
             </ul>
             <form className="d-flex" role="search">
@@ -46,7 +51,11 @@ function Navbar1() {
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button className="btn custom-login-btn" type="submit">
+              <button
+                className="btn custom-login-btn"
+                type="submit"
+                onClick={() => handleRole()}
+              >
                 Login
               </button>
             </form>
