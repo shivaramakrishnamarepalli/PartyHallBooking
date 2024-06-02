@@ -45,20 +45,42 @@ function UserBookings() {
   console.log(bookings);
 
   return (
+
     <>
       <div id="ErrorDisplay"></div>
-      <h1>Your bookings : </h1>
+      <h1 className="text-center">Your bookings :</h1>
       {bookings.length === 0 && <div>No booking found!</div>}
 
-      {bookings.map((booking) => (
-        //print all the booking details in the form of cards (long and horizontal)
-        <div key={booking.booking_id}>
-          <div>Booking id : {booking.booking_id}</div>
-          <div>Hall booked : {booking.hall_id}</div>
-          <div>date : {booking.booked_date}</div>
-          <br></br>
-        </div>
-      ))}
+      {bookings.length > 0 && (
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr>
+              <th>Booking ID</th>
+              <th>Hall Booked</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((booking) => {
+              const date = new Date(booking.booked_date);
+              const formattedDate = date.toLocaleDateString();
+              const today = new Date();
+              const isActive = date > today;
+
+              return (
+                <tr key={booking.booking_id}>
+                  <td>{booking.booking_id}</td>
+                  <td>{booking.hall_id}</td>
+                  <td>{formattedDate}</td>
+                  <td>{isActive ? "✔️ Active" : "❌ Expired" } </td>{" "}
+                  {/* Display active symbol if the date is after today */}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </>
   );
 }
