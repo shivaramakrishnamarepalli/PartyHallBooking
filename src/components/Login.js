@@ -22,7 +22,7 @@ const Login = () => {
     navigate(`/user/home`);
   };
   const handleMoveAdmin = () => {
-    navigate(`/admin/addHall`);
+    navigate(`/admin/home`);
   };
 
   const handleLogin = async () => {

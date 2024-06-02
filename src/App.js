@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import UserBookings from "./components/UserBookings";
 import RoleSelection from "./components/RoleSelection";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminHome from "./components/AdminHome";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
                 <Routes>
                   {/* <Route path="admin/home" element={<Home/>}/> */}
                   <Route path="addHall" element={<HallForm />} />
+                  <Route path="home" element={<AdminHome />} />
+                  <Route path="" element={<AdminHome />} />
                 </Routes>
               </ProtectedRoute>
             }
