@@ -13,6 +13,7 @@ import UserBookings from "./components/UserBookings";
 import RoleSelection from "./components/RoleSelection";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminHome from "./components/AdminHome";
+import SuperAdmin from "./components/SuperAdmin";
 
 function App() {
   return (
@@ -48,6 +49,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="/super/private-key/home" element={<SuperAdmin />} />
         </Routes>
       </BrowserRouter>
     </>
