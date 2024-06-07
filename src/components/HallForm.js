@@ -9,15 +9,14 @@ const HallForm = () => {
     navigate(`/admin/home`);
   };
 
-  const [loading,setLoading] = useState(false)
-  const [hall_image_value,setHIV] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [hall_image_value, setHIV] = useState("");
   function handleImageUpload(e) {
-    try{
+    try {
       console.log(e.target.files);
       setHIV(URL.createObjectURL(e.target.files[0]));
-    }
-    catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -57,17 +56,16 @@ const HallForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    await handleSubmit1(e)
-    setLoading(false)
-  }
+    e.preventDefault();
+    setLoading(true);
+    await handleSubmit1(e);
+    setLoading(false);
+  };
 
   const handleSubmit1 = async (e) => {
-
-    if(hall_image_value===""){
-      alert("Please Upload Hall Image!")
-      return
+    if (hall_image_value === "") {
+      alert("Please Upload Hall Image!");
+      return;
     }
 
     console.log(formData);
@@ -106,11 +104,11 @@ const HallForm = () => {
       .then(async (res) => {
         console.log(res, "succ");
         await uploadImage();
-        alert("Your request has been sent successfully! Thank You!")
-        handleSuccess()
+        alert("Your request has been sent successfully! Thank You!");
+        handleSuccess();
       })
       .catch((err) => {
-        alert("Something failed!Please check your details!")
+        alert("Something failed!Please check your details!");
         console.log(err, "err");
         return;
       });
@@ -162,50 +160,59 @@ const HallForm = () => {
     }
   }
 
-  return (<div>
-    <div className="container-wrapper">
-      <div className="container card p-3">
-        <div className="row background-img">
-          <div className="col-md-3 p-4">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                border: "1px solid #ddd",
-                borderRadius: "4px",
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                padding: "1rem",
-                color: "#ffffff",
-                fontSize: "1.1rem",
-              }}
-            >
-              <div>
-                <label htmlFor="hall_image">Hall Image</label>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "300px",
-                    backgroundColor: "rgba(255, 255, 255, 0.7)",
-                    display: "flex",
-                    justifyContent: "center",
-                    color: "black",
-                    fontSize: "1.1rem",
-                    alignItems: "center",
-                    marginBottom: "1rem",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                  }}
-                >
-                  {!hall_image_value && <span>No Image</span>}
-                  {hall_image_value && <img
-                  style={{width: "300px",
-                  height: "300px"}}
-                  src={hall_image_value} alt="Uploaded" />}
-                </div>
-                <input type="file" id="hall_image" className="form-control" onChange={handleImageUpload}/>
-                {/* <button
+  return (
+    <div>
+      <div className="container-wrapper">
+        <div className="container card p-3">
+          <div className="row background-img">
+            <div className="col-md-3 p-4">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                  border: "1px solid #ddd",
+                  borderRadius: "4px",
+                  backgroundColor: "rgba(255, 255, 255, 0.2)",
+                  padding: "1rem",
+                  color: "#ffffff",
+                  fontSize: "1.1rem",
+                }}
+              >
+                <div>
+                  <label htmlFor="hall_image">Hall Image</label>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "300px",
+                      backgroundColor: "rgba(255, 255, 255, 0.7)",
+                      display: "flex",
+                      justifyContent: "center",
+                      color: "black",
+                      fontSize: "1.1rem",
+                      alignItems: "center",
+                      marginBottom: "1rem",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    {!hall_image_value && <span>No Image</span>}
+                    {hall_image_value && (
+                      <img
+                        style={{ width: "280px", height: "300px" }}
+                        src={hall_image_value}
+                        alt="Uploaded"
+                      />
+                    )}
+                  </div>
+                  <input
+                    type="file"
+                    id="hall_image"
+                    className="form-control"
+                    onChange={handleImageUpload}
+                  />
+                  {/* <button
                   onClick={setImage}
                   className="btn btn-secondary p-2 mt-3"
                   style={{
@@ -216,162 +223,188 @@ const HallForm = () => {
                 >
                   Upload Image
                 </button> */}
-                <p id="uploadStatus"></p>
+                  <p id="uploadStatus"></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9 p-2">
-            <div
-              className="container p-4"
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                borderRadius: "4px",
-                color: "#ffffff",
-                fontSize: "1.1rem",
-              }}
-            >
-              <form onSubmit={handleSubmit}>
-                <div className="row">
-                  <div className="form-group col-md-6 p-1">
-                    <label htmlFor="hall_id">Hall ID</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="hall_id"
-                      name="hall_id"
-                      onChange={handleChange}
-                      value={formData.hall_id}
-                    />
-                    {errors.hall_id && (
-                      <small className="text-danger">{errors.hall_id}</small>
-                    )}
-                  </div>
-                  <div className="form-group col-md-6 p-1">
-                    <label htmlFor="admin_id">Admin ID</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="admin_id"
-                      name="admin_id"
-                      onChange={handleChange}
-                      value={formData.admin_id}
-                    />
-                    {errors.admin_id && (
-                      <small className="text-danger">{errors.admin_id}</small>
-                    )}
-                  </div>
-                  <div className="form-group col-md-12 p-1">
-                    <label htmlFor="hall_name">Hall Name</label>
-                    <textarea
-                      className="form-control"
-                      id="hall_name"
-                      name="hall_name"
-                      onChange={handleChange}
-                      value={formData.hall_name}
-                      rows={2}
-                    />
-                    {errors.hall_name && (
-                      <small className="text-danger">{errors.hall_name}</small>
-                    )}
-                  </div>
-                  <div className="form-group col-md-12 p-1">
-                    <label htmlFor="hall_address">Hall Address</label>
-                    <textarea
-                      className="form-control"
-                      id="hall_address"
-                      name="hall_address"
-                      onChange={handleChange}
-                      value={formData.hall_address}
-                      rows={3}
-                    />
-                    {errors.hall_address && (
-                      <small className="text-danger">
-                        {errors.hall_address}
-                      </small>
-                    )}
-                  </div>
+            <div className="col-md-9 p-2">
+              <div
+                className="container p-4"
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  borderRadius: "4px",
+                  color: "#ffffff",
+                  fontSize: "1.1rem",
+                }}
+              >
+                <form onSubmit={handleSubmit}>
+                  <div className="row">
+                    <div className="form-group col-md-6 p-1">
+                      <label htmlFor="hall_id">Hall ID</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="hall_id"
+                        name="hall_id"
+                        onChange={handleChange}
+                        value={formData.hall_id}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.hall_id && (
+                        <small className="text-danger">{errors.hall_id}</small>
+                      )}
+                    </div>
+                    <div className="form-group col-md-6 p-1">
+                      <label htmlFor="admin_id">Admin ID</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="admin_id"
+                        name="admin_id"
+                        onChange={handleChange}
+                        value={formData.admin_id}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.admin_id && (
+                        <small className="text-danger">{errors.admin_id}</small>
+                      )}
+                    </div>
+                    <div className="form-group col-md-12 p-1">
+                      <label htmlFor="hall_name">Hall Name</label>
+                      <textarea
+                        className="form-control"
+                        id="hall_name"
+                        name="hall_name"
+                        onChange={handleChange}
+                        value={formData.hall_name}
+                        rows={2}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.hall_name && (
+                        <small className="text-danger">
+                          {errors.hall_name}
+                        </small>
+                      )}
+                    </div>
+                    <div className="form-group col-md-12 p-1">
+                      <label htmlFor="hall_address">Hall Address</label>
+                      <textarea
+                        className="form-control"
+                        id="hall_address"
+                        name="hall_address"
+                        onChange={handleChange}
+                        value={formData.hall_address}
+                        rows={3}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.hall_address && (
+                        <small className="text-danger">
+                          {errors.hall_address}
+                        </small>
+                      )}
+                    </div>
 
-                  <div className="form-group col-md-6 p-1">
-                    <label htmlFor="status">Status</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="status"
-                      name="status"
-                      onChange={handleChange}
-                      value={formData.status}
-                    />
-                    {errors.status && (
-                      <small className="text-danger">{errors.status}</small>
-                    )}
+                    <div className="form-group col-md-6 p-1">
+                      <label htmlFor="status">Status</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="status"
+                        name="status"
+                        onChange={handleChange}
+                        value={formData.status}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.status && (
+                        <small className="text-danger">{errors.status}</small>
+                      )}
+                    </div>
+                    <div className="form-group col-md-6 p-1">
+                      <label htmlFor="hall_rental_cost">Rental Cost</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="hall_rental_cost"
+                        name="hall_rental_cost"
+                        onChange={handleChange}
+                        value={formData.hall_rental_cost}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.hall_rental_cost && (
+                        <small className="text-danger">
+                          {errors.hall_rental_cost}
+                        </small>
+                      )}
+                    </div>
+                    <div className="form-group col-md-6 p-1">
+                      <label htmlFor="hall_max_capacity">Max Capacity</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="hall_max_capacity"
+                        name="hall_max_capacity"
+                        onChange={handleChange}
+                        value={formData.hall_max_capacity}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.hall_max_capacity && (
+                        <small className="text-danger">
+                          {errors.hall_max_capacity}
+                        </small>
+                      )}
+                    </div>
+                    <div className="form-group col-md-6 p-1">
+                      <label htmlFor="hall_price_plate">Price per Plate</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="hall_price_plate"
+                        name="hall_price_plate"
+                        onChange={handleChange}
+                        value={formData.hall_price_plate}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      />
+                      {errors.hall_price_plate && (
+                        <small className="text-danger">
+                          {errors.hall_price_plate}
+                        </small>
+                      )}
+                    </div>
                   </div>
-                  <div className="form-group col-md-6 p-1">
-                    <label htmlFor="hall_rental_cost">Rental Cost</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="hall_rental_cost"
-                      name="hall_rental_cost"
-                      onChange={handleChange}
-                      value={formData.hall_rental_cost}
-                    />
-                    {errors.hall_rental_cost && (
-                      <small className="text-danger">
-                        {errors.hall_rental_cost}
-                      </small>
-                    )}
-                  </div>
-                  <div className="form-group col-md-6 p-1">
-                    <label htmlFor="hall_max_capacity">Max Capacity</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="hall_max_capacity"
-                      name="hall_max_capacity"
-                      onChange={handleChange}
-                      value={formData.hall_max_capacity}
-                    />
-                    {errors.hall_max_capacity && (
-                      <small className="text-danger">
-                        {errors.hall_max_capacity}
-                      </small>
-                    )}
-                  </div>
-                  <div className="form-group col-md-6 p-1">
-                    <label htmlFor="hall_price_plate">Price per Plate</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="hall_price_plate"
-                      name="hall_price_plate"
-                      onChange={handleChange}
-                      value={formData.hall_price_plate}
-                    />
-                    {errors.hall_price_plate && (
-                      <small className="text-danger">
-                        {errors.hall_price_plate}
-                      </small>
-                    )}
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="btn btn-secondary p-2 mt-3"
-                  style={{
-                    backgroundColor: "white",
-                    color: "brown",
-                    width: "100%",
-                  }}
-                >
-                  Add Hall
-                </button>
-              </form>
-              {loading && <div>Uploading your hall request... </div>}
+                  <button
+                    type="submit"
+                    className="btn btn-secondary p-2 mt-3"
+                    style={{
+                      backgroundColor: "white",
+                      color: "brown",
+                      width: "100%",
+                    }}
+                  >
+                    Add Hall
+                  </button>
+                </form>
+                {loading && <div>Uploading your hall request... </div>}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
