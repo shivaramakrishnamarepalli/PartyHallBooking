@@ -44,6 +44,12 @@ h2 {
   width: 100%;
 }
 
+.background-img {
+  background-image: url("../images/addHallImg_1.avif");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 .form-control:focus {
   border-color: #80bdff;
