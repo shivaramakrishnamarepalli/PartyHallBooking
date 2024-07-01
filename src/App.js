@@ -1,19 +1,20 @@
-import "./App.css";
-import CardsDisplay from "./components/CardsDisplay";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EditAndDeleteHall from "./components/EditAndDeleteHall";
-import RequestToAddHall from "./components/RequestToAddHall";
-import SpecificCard from "./components/SpecificCard";
-import HallForm from "./components/HallForm";
-import Login from "./components/Login";
-import HomeComponent from "./components/HomeComponent";
-import CenterSpecificHall from "./components/CenterSpecificHall";
-import Home from "./components/Home";
-import UserBookings from "./components/UserBookings";
-import RoleSelection from "./components/RoleSelection";
-import ProtectedRoute from "./components/ProtectedRoute";
-import AdminHome from "./components/AdminHome";
-import SuperAdmin from "./components/SuperAdmin";
+import './App.css'
+import CardsDisplay from './components/CardsDisplay'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import EditAndDeleteHall from './components/EditAndDeleteHall'
+import RequestToAddHall from './components/RequestToAddHall'
+import SpecificCard from './components/SpecificCard'
+import HallForm from './components/HallForm'
+import Login from './components/Login'
+import HomeComponent from './components/HomeComponent'
+import CenterSpecificHall from './components/CenterSpecificHall'
+import Home from './components/Home'
+import UserBookings from './components/UserBookings'
+import RoleSelection from './components/RoleSelection'
+import ProtectedRoute from './components/ProtectedRoute'
+import AdminHome from './components/AdminHome'
+import SuperAdmin from './components/SuperAdmin'
+import ViewProfile from './components/ViewProfile'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/user/bookings" element={<UserBookings />} />
 
           {/* admin routes */}
+          <Route path="/admin/profile" element={<ViewProfile />} />
           <Route
             path="/admin/*"
             element={
@@ -54,7 +56,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

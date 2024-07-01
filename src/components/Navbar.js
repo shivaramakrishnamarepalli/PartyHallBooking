@@ -1,12 +1,15 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import { Dropdown, DropdownButton } from 'react-bootstrap';
 // import spvLogo from '../spv.jpg'
-import "../styles/index.css";
-import { Link, useNavigate } from "react-router-dom";
+import '../styles/index.css'
+import { Link, useNavigate } from 'react-router-dom'
 function Navbar1() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   function handleRole() {
-    navigate("/");
+    navigate('/')
+  }
+  function handleProfile() {
+    navigate('/admin/profile/')
   }
   return (
     <>
@@ -58,11 +61,17 @@ function Navbar1() {
               >
                 Login
               </button>
+              <button
+                className="btn custom-login-btn"
+                onClick={() => handleProfile()}
+              >
+                UserProfile
+              </button>
             </form>
           </div>
         </div>
       </nav>
     </>
-  );
+  )
 }
-export default Navbar1;
+export default Navbar1
