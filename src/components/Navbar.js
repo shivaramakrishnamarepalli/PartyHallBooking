@@ -71,7 +71,7 @@ function Navbar1() {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mr-auto m-2">
                   <li className="nav-item">
-                    {localStorage.getItem("userRole") && (
+                    {localStorage.getItem("user_id") && (
                       <button
                         className="btn btn-danger"
                         onClick={handleSignOut}
@@ -82,7 +82,7 @@ function Navbar1() {
                   </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
-                  {!localStorage.getItem("userRole") && (
+                  {!localStorage.getItem("user_id") && (
                     <li className="nav-item">
                       {/* <Link className="nav-link" to="/login">
                         Login
@@ -96,7 +96,7 @@ function Navbar1() {
                       </button>
                     </li>
                   )}
-                  {localStorage.getItem("userRole") && (
+                  {localStorage.getItem("user_id") && (
                     <li className="nav-item">
                       <button
                         className="btn custom-login-btn"

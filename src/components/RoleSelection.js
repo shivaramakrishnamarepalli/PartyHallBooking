@@ -19,7 +19,9 @@ function RoleSelection() {
           <div className="role-container container-fluid">
             <div className="container-role rounded ">
               <div className="card-body justify-content-center row ">
-                <h5 className="card-title text-center m-3">Select Your Role</h5>
+                <h5 className="card-title text-center m-3 text-light">
+                  Select Your Role
+                </h5>
                 <div className="buttons-class col-auto">
                   <button
                     onClick={() => handleRoleSelection("admin")}

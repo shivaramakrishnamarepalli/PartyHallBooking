@@ -192,8 +192,10 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
-            <Button onClick={handleLogin}>Login</Button>
-            <Button onClick={toggleSignupForm} className="m-2">
+            <Button onClick={handleLogin} className="btn-success">
+              Login
+            </Button>
+            <Button onClick={toggleSignupForm} className="m-2 btn-dark">
               {signupFormVisible ? "Back to Login" : " Go to Signup"}
             </Button>
           </Form>
@@ -254,8 +256,10 @@ const Login = () => {
                 onChange={handleInputChange}
               />
             </FormGroup>
-            <Button onClick={handleSignup}>Signup</Button>
-            <Button onClick={toggleSignupForm} className="m-2">
+            <Button onClick={handleSignup} className="btn-success">
+              Signup
+            </Button>
+            <Button onClick={toggleSignupForm} className="m-2 btn-dark">
               {signupFormVisible ? "Back to Login" : "Go to Signup"}
             </Button>
           </Form>
