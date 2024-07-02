@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CardComponent from "./CardComponent";
+import AdminCard from "./AdminCard";
 import axios from "axios";
 import "../styles/cardDisplay.css";
 import Navbar1 from "./Navbar";
@@ -57,7 +57,7 @@ function AdminHome() {
 
           <div className="card-container">
             {halls.map((hall) => (
-              <CardComponent
+              <AdminCard
                 key={hall.hall_id}
                 name={hall.hall_name}
                 address={hall.hall_address}

@@ -16,6 +16,7 @@ import AdminHome from "./components/AdminHome";
 import SuperAdmin from "./components/SuperAdmin";
 import ViewProfile from "./components/ViewProfile";
 import Navbar1 from "./components/Navbar";
+import SpecificAdminCard from "./components/SpecificAdminCard";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
                   <Route path="addHall" element={<HallForm />} />
                   <Route path="home" element={<AdminHome />} />
                   <Route path="" element={<AdminHome />} />
+                  <Route path="/hall/:id" element={<SpecificAdminCard />} />
                 </Routes>
               </ProtectedRoute>
             }
