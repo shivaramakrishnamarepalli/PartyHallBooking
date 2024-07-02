@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
-import CardComponent from "./CardComponent";
+import HallCard from "./HallList";
 import axios from "axios";
+import HallList from "./HallList";
 
 function SuperAdmin() {
   const [pendingRequests, setPendingRequests] = useState([]);
+  const [showReq, setShowReq] = useState(false);
 
-  function AcceptReq() {}
-  function RejectReq() {}
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     async function fetchHalls() {
@@ -15,6 +21,7 @@ function SuperAdmin() {
           "http://localhost:3006/api/super/requests"
         );
         setPendingRequests(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching halls:", error);
       }
@@ -23,34 +30,62 @@ function SuperAdmin() {
     fetchHalls();
   }, []);
 
+  async function AcceptReq(hall_id) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3006/api/super/halls",
+        {
+          hall_id: hall_id,
+        }
+      );
+      window.location.reload(true);
+    } catch (error) {
+      console.error("Error fetching halls:", error);
+    }
+  }
+  async function RejectReq(hall_id) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3006/api/super/halls/rej",
+        {
+          hall_id: hall_id,
+        }
+      );
+      window.location.reload(true);
+    } catch (error) {
+      console.error("Error fetching halls:", error);
+    }
+    console.log(hall_id);
+  }
+
   return (
-    <div className="container mt-4 sa">
-      <h1 className="mb-4">SuperAdmin</h1>
-      <div className="row">
-        {pendingRequests.map((hall) => (
-          <div key={hall.hall_id} className="col-md-4 mb-4">
-            <CardComponent
-              name={hall.hall_name}
-              address={hall.hall_address}
-              admin={hall.admin_id}
-              rental_cost={hall.hall_rental_cost}
-              rating={hall.hall_rating}
-              capacity={hall.hall_max_capacity}
-              id={hall.hall_id}
-              imageData={hall.hall_image}
-            />
-            <div className="d-flex justify-content-between mt-2">
-              <button className="btn btn-success" onClick={AcceptReq}>
-                ✔️ Accept
-              </button>
-              <button className="btn btn-danger" onClick={RejectReq}>
-                ❌ Reject
-              </button>
-            </div>
-          </div>
-        ))}
+    <>
+      <div className="container mt-4 sa">
+        <h1 className="mb-4">SuperAdmin</h1>
+        {loading && pendingRequests.length === 0 && (
+          <>Requests are loading...</>
+        )}
+        {!loading && pendingRequests.length === 0 && <>No Requests Available</>}
+        {pendingRequests.length !== 0 && (
+          <>
+            <button
+              onClick={() => {
+                setShowReq(!showReq);
+              }}
+            >
+              Show Pending Requests
+            </button>
+            {showReq && (
+              <HallList
+                pendingRequests={pendingRequests}
+                AcceptReq={AcceptReq}
+                RejectReq={RejectReq}
+              />
+            )}
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 }
 

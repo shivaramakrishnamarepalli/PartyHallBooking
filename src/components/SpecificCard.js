@@ -66,10 +66,12 @@ function SpecificCard() {
     const token = localStorage.getItem("token");
 
     const today = new Date();
+    const bd = new Date(bookedDate);
 
-    if (bookedDate > today) {
+    if (bd.getDate() > today.getDate()) {
       console.log("The booked date is after today's date.");
     } else {
+      console.log("bd: ", bookedDate, "today : ", today);
       alert("please choose a valid date!");
       return;
     }
