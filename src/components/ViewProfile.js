@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import axios from 'axios'
+import axios from "axios";
 
 export default function ViewProfile() {
-  const [user, setUser] = useState(null)
-  const [editMode, setEditMode] = useState(false)
+  const [user, setUser] = useState(null);
+  const [editMode, setEditMode] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleEdit() {
     // const role = localStorage.getItem('userRole')
     // const id = localStorage.getItem('user_id')
     // navigate(`/${role}/editProfile/${id}`)
 
-    setEditMode(!editMode)
+    setEditMode(!editMode);
   }
 
   //   useEffect(() => {
@@ -46,22 +46,22 @@ export default function ViewProfile() {
   //     fetchUser()
   //   }, [])
 
-  const { id } = useParams() // Get user ID from URL params
+  const { id } = useParams(); // Get user ID from URL params
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    mobileNumber: '',
-    id: '',
-  })
+    name: "",
+    email: "",
+    mobileNumber: "",
+    id: "",
+  });
   useEffect(() => {
     async function fetchHalls() {
       try {
-        const id = localStorage.getItem('user_id')
+        const id = localStorage.getItem("user_id");
         if (!id) {
-          throw new Error('User ID not found in localStorage')
+          throw new Error("User ID not found in localStorage");
         }
-        console.log(id)
-        const token = localStorage.getItem('token')
+        console.log(id);
+        const token = localStorage.getItem("token");
 
         await axios
           .get(`http://localhost:3006/api/admin/profile/${id}`, {
@@ -70,22 +70,22 @@ export default function ViewProfile() {
             },
           })
           .then((res) => {
-            setUser(res.data)
+            setUser(res.data);
             setFormData({
               name: res.data.admin_name,
               email: res.data.admin_email,
               mobileNumber: res.data.admin_mobile_no,
               id: res.data.admin_id,
-            })
-            console.log(res.data)
-          })
+            });
+            console.log(res.data);
+          });
       } catch (error) {
-        console.error('Error fetching halls:', error)
+        console.error("Error fetching halls:", error);
       }
     }
 
-    fetchHalls()
-  }, [])
+    fetchHalls();
+  }, []);
 
   //   useEffect(() => {
   //     async function fetchUserProfile() {
@@ -106,46 +106,46 @@ export default function ViewProfile() {
   //   }, [id])
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      console.log(formData)
-      const id = localStorage.getItem('user_id')
+      console.log(formData);
+      const id = localStorage.getItem("user_id");
       if (!id) {
-        throw new Error('User ID not found in localStorage')
+        throw new Error("User ID not found in localStorage");
       }
-      console.log(id)
-      const token = localStorage.getItem('token')
+      console.log(id);
+      const token = localStorage.getItem("token");
 
       const response = await fetch(
         `http://localhost:3006/api/admin/editProfile/${id}`,
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
         }
-      )
+      );
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
       if (response.ok) {
-        alert('Profile updated successfully!')
-        window.location.reload(true)
+        alert("Profile updated successfully!");
+        window.location.reload(true);
       }
     } catch (error) {
-      console.error('Error updating profile:', error.message)
+      console.error("Error updating profile:", error.message);
     }
-  }
+  };
 
   return (
     <>
@@ -249,5 +249,5 @@ export default function ViewProfile() {
         </div>
       )}
     </>
-  )
+  );
 }
