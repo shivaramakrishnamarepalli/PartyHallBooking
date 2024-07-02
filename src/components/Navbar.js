@@ -1,15 +1,22 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 // import { Dropdown, DropdownButton } from 'react-bootstrap';
 // import spvLogo from '../spv.jpg'
-import '../styles/index.css'
-import { Link, useNavigate } from 'react-router-dom'
+import "../styles/index.css";
+import { Link, useNavigate } from "react-router-dom";
 function Navbar1() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   function handleRole() {
-    navigate('/')
+    navigate("/");
   }
   function handleProfile() {
-    navigate('/admin/profile/')
+    navigate("/profile/");
+  }
+  function handleSignOut() {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("userRole");
+
+    navigate("/login");
+    // or navigate to the login page
   }
   return (
     <>
@@ -48,13 +55,7 @@ function Navbar1() {
               </li>
             </ul>
             <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
+              {/* <button
                 className="btn custom-login-btn"
                 type="submit"
                 onClick={() => handleRole()}
@@ -66,12 +67,52 @@ function Navbar1() {
                 onClick={() => handleProfile()}
               >
                 UserProfile
-              </button>
+              </button> */}
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav mr-auto m-2">
+                  <li className="nav-item">
+                    {localStorage.getItem("userRole") && (
+                      <button
+                        className="btn btn-danger"
+                        onClick={handleSignOut}
+                      >
+                        Sign Out
+                      </button>
+                    )}
+                  </li>
+                </ul>
+                <ul className="navbar-nav ml-auto">
+                  {!localStorage.getItem("userRole") && (
+                    <li className="nav-item">
+                      {/* <Link className="nav-link" to="/login">
+                        Login
+                      </Link> */}
+                      <button
+                        className="btn custom-login-btn"
+                        type="submit"
+                        onClick={() => handleRole()}
+                      >
+                        Login
+                      </button>
+                    </li>
+                  )}
+                  {localStorage.getItem("userRole") && (
+                    <li className="nav-item">
+                      <button
+                        className="btn custom-login-btn"
+                        onClick={() => handleProfile()}
+                      >
+                        UserProfile
+                      </button>
+                    </li>
+                  )}
+                </ul>
+              </div>
             </form>
           </div>
         </div>
       </nav>
     </>
-  )
+  );
 }
-export default Navbar1
+export default Navbar1;
