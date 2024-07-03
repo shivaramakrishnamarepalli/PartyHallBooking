@@ -5,6 +5,11 @@
 body {
   background-color: darkgrey;
 }
+
+::selection {
+  color: greenyellow;
+  background-color: black;
+}
 .custom-login-btn {
   background-color: gray;
   color: white;
