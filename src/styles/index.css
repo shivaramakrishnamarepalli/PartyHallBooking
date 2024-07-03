@@ -3,7 +3,7 @@
   transform: translateY(-2px); /* Add your desired transformation */
 }
 body {
-  background-color: darkgrey;
+  background-color: white;
 }
 
 ::selection {
