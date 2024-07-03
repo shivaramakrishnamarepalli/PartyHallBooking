@@ -133,6 +133,11 @@ function SpecificCard() {
                 {hall.admin_id}
               </p>
               <p className="card-text lead">
+                <strong style={{ color: "#6c757d" }}>Hall ID:</strong>{" "}
+                {hall.hall_id}
+              </p>
+              {/* //new */}
+              <p className="card-text lead">
                 <strong style={{ color: "#6c757d" }}>Status:</strong>{" "}
                 {hall.status}
               </p>
@@ -189,9 +194,20 @@ function SpecificCard() {
               className="m-1 form-control full-width"
             />
           </label>
+          {/* //new */}
+          <label className="p-2 form-label">
+            Amount
+            <input
+              type="number"
+              readOnly
+              value={hall.hall_rental_cost}
+              className="m-1 form-control full-width"
+            />
+          </label>
 
           {/* <input type="submit" value="Submit" className="btn btn-primary m-1 "/> */}
-          <Button>Book hall</Button>
+          <Button className="btn-success">Book hall</Button>
+          {/* //new */}
         </form>
       </div>
       <div id="Reviews"></div>

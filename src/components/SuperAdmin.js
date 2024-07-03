@@ -60,30 +60,35 @@ function SuperAdmin() {
 
   return (
     <>
-      <div className="container mt-4 sa">
-        <h1 className="mb-4">SuperAdmin</h1>
-        {loading && pendingRequests.length === 0 && (
-          <>Requests are loading...</>
-        )}
-        {!loading && pendingRequests.length === 0 && <>No Requests Available</>}
-        {pendingRequests.length !== 0 && (
-          <>
-            <button
-              onClick={() => {
-                setShowReq(!showReq);
-              }}
-            >
-              Show Pending Requests
-            </button>
-            {showReq && (
-              <HallList
-                pendingRequests={pendingRequests}
-                AcceptReq={AcceptReq}
-                RejectReq={RejectReq}
-              />
-            )}
-          </>
-        )}
+      <div className="container-wrapper">
+        <div className="container-card p-5">
+          <h1 className="mb-4 text-center">SuperAdmin</h1>
+          {loading && pendingRequests.length === 0 && (
+            <>Requests are loading...</>
+          )}
+          {!loading && pendingRequests.length === 0 && (
+            <>No Requests Available</>
+          )}
+          {pendingRequests.length !== 0 && (
+            <>
+              <button
+                onClick={() => {
+                  setShowReq(!showReq);
+                }}
+                className="btn btn-info fs-5 m-2"
+              >
+                Pending Requests
+              </button>
+              {showReq && (
+                <HallList
+                  pendingRequests={pendingRequests}
+                  AcceptReq={AcceptReq}
+                  RejectReq={RejectReq}
+                />
+              )}
+            </>
+          )}
+        </div>
       </div>
     </>
   );

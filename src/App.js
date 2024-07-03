@@ -17,6 +17,8 @@ import SuperAdmin from "./components/SuperAdmin";
 import ViewProfile from "./components/ViewProfile";
 import Navbar1 from "./components/Navbar";
 import SpecificAdminCard from "./components/SpecificAdminCard";
+import Footer from "./components/Footer";
+import Contactus from "./components/Contactus";
 
 function App() {
   return (
@@ -28,8 +30,10 @@ function App() {
         <Routes>
           <Route path="*" element={<RoleSelection />} />
           <Route path="/role" element={<RoleSelection />} />
-          <Route path="/home" element={<Home />} />
+          {/* <Route path="/home" element={<Home />} /> */}
           {/* common routes */}
+          <Route path="/contact" element={<Contactus />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
           <Route path="*" element={<>default page</>} />
@@ -51,6 +55,7 @@ function App() {
                   <Route path="home" element={<AdminHome />} />
                   <Route path="" element={<AdminHome />} />
                   <Route path="/hall/:id" element={<SpecificAdminCard />} />
+                  {/* //problem */}
                 </Routes>
               </ProtectedRoute>
             }
@@ -59,6 +64,7 @@ function App() {
           <Route path="/super/private-key/home" element={<SuperAdmin />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

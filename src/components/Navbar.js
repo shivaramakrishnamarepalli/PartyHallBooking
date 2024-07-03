@@ -14,8 +14,9 @@ function Navbar1() {
   function handleSignOut() {
     localStorage.removeItem("user_id");
     localStorage.removeItem("userRole");
-
-    navigate("/login");
+    localStorage.removeItem("token");
+    //new
+    navigate("/role");
     // or navigate to the login page
   }
   return (
@@ -49,7 +50,11 @@ function Navbar1() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="#">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/contact"
+                >
                   CONTACT
                 </Link>
               </li>

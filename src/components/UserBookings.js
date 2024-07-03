@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function UserBookings() {
   const [bookings, setBookings] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchBookings() {
       let id = localStorage.getItem("user_id");
@@ -11,6 +12,8 @@ function UserBookings() {
 
       if (!token) {
         alert("Please login again!");
+        //new
+        navigate("/role");
       }
       if (!id) {
         while (id) {
@@ -45,7 +48,6 @@ function UserBookings() {
   console.log(bookings);
 
   return (
-
     <>
       <div id="ErrorDisplay"></div>
       <h1 className="text-center">Your bookings :</h1>
@@ -73,7 +75,7 @@ function UserBookings() {
                   <td>{booking.booking_id}</td>
                   <td>{booking.hall_id}</td>
                   <td>{formattedDate}</td>
-                  <td>{isActive ? "✔️ Active" : "❌ Expired" } </td>{" "}
+                  <td>{isActive ? "✔️ Active" : "❌ Expired"} </td>{" "}
                   {/* Display active symbol if the date is after today */}
                 </tr>
               );

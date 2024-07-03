@@ -34,10 +34,10 @@ const HallCard = ({ hall, AcceptReq, RejectReq }) => {
           <strong>Status:</strong> {hall.status}
         </p>
         <div className="d-flex justify-content-between mt-2">
-          <button className="btn btn-success" onClick={AcceptReq}>
+          <button className="btn btn-success p-3 fs-6" onClick={AcceptReq}>
             ✔️ Accept
           </button>
-          <button className="btn btn-danger" onClick={RejectReq}>
+          <button className="btn btn-danger p-3 fs-6" onClick={RejectReq}>
             ❌ Reject
           </button>
         </div>
