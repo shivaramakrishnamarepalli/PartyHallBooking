@@ -149,14 +149,16 @@ function SpecificCard() {
                 <strong style={{ color: "#6c757d" }}>Max Capacity:</strong>{" "}
                 {hall.hall_max_capacity}
               </p>
-              <p className="card-text lead">
-                <strong style={{ color: "#6c757d" }}>Price per Plate:</strong> $
-                {hall.hall_price_per_plate}
-              </p>
-              <p className="card-text lead">
+              {hall.hall_price_per_plate && (
+                <p className="card-text lead">
+                  <strong style={{ color: "#6c757d" }}>Price per Plate:</strong>{" "}
+                  ${hall.hall_price_per_plate}
+                </p>
+              )}
+              {/* <p className="card-text lead">
                 <strong style={{ color: "#6c757d" }}>Rating:</strong>{" "}
                 {hall.hall_rating}
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

@@ -27,6 +27,7 @@ function App() {
       {/* <h1>React App</h1> */}
       {/* <CardsDisplay /> */}
       {/* <Navbar1></Navbar1> */}
+      {/* <Navbar1 /> */}
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<RoleSelection />} />

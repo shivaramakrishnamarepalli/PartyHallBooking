@@ -56,7 +56,7 @@ function Card({ id, name, address, rental_cost, rating, capacity }) {
             <span>
               <h5>
                 <img src={rating1} width={"22rem"} alt="rating" />
-                <span> {rating}</span>
+                {/* <span> {rating}</span> */}
               </h5>
             </span>
           </div>

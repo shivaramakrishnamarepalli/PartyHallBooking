@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import CardComponent from "./CardComponent";
 import axios from "axios";
-import "../styles/cardDisplay.css"
+import "../styles/cardDisplay.css";
 
 function CardsDisplay() {
   const [halls, setHalls] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     async function fetchHalls() {
@@ -21,22 +22,38 @@ function CardsDisplay() {
     fetchHalls();
   }, []);
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredHalls = halls.filter((hall) =>
+    hall.hall_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="card-container">
-      {halls.map((hall) => (
-        <CardComponent
-          key={hall.hall_id}
-          name={hall.hall_name}
-          address={hall.hall_address}
-          admin={hall.admin_id}
-          rental_cost={hall.hall_rental_cost}
-          rating={hall.hall_rating}
-          capacity={hall.hall_max_capacity}
-          id={hall.hall_id}
-          imageData={hall.hall_image}
-        />
-      ))}
-      
+    <div>
+      <input
+        type="text"
+        placeholder="Search for a hall"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        className="search-input p-1 rounded m-2 "
+      />
+      <div className="card-container ">
+        {filteredHalls.map((hall) => (
+          <CardComponent
+            key={hall.hall_id}
+            name={hall.hall_name}
+            address={hall.hall_address}
+            admin={hall.admin_id}
+            rental_cost={hall.hall_rental_cost}
+            rating={hall.hall_rating}
+            capacity={hall.hall_max_capacity}
+            id={hall.hall_id}
+            imageData={hall.hall_image}
+          />
+        ))}
+      </div>
     </div>
   );
 }

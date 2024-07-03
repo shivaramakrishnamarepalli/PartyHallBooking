@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navbar1 from "./Navbar";
 
 function UserBookings() {
   const [bookings, setBookings] = useState([]);
