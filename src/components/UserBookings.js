@@ -50,39 +50,44 @@ function UserBookings() {
   return (
     <>
       <div id="ErrorDisplay"></div>
-      <h1 className="text-center">Your bookings :</h1>
-      {bookings.length === 0 && <div>No booking found!</div>}
+      <div className="container-wrapper">
+        <div className="container card">
+          <h1 className="text-center">Bookings ⬇️</h1>
+          <hr></hr>
+          {bookings.length === 0 && <div>No booking found!</div>}
 
-      {bookings.length > 0 && (
-        <table className="table table-striped">
-          <thead className="thead-dark">
-            <tr>
-              <th>Booking ID</th>
-              <th>Hall Booked</th>
-              <th>Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookings.map((booking) => {
-              const date = new Date(booking.booked_date);
-              const formattedDate = date.toLocaleDateString();
-              const today = new Date();
-              const isActive = date > today;
-
-              return (
-                <tr key={booking.booking_id}>
-                  <td>{booking.booking_id}</td>
-                  <td>{booking.hall_id}</td>
-                  <td>{formattedDate}</td>
-                  <td>{isActive ? "✔️ Active" : "❌ Expired"} </td>{" "}
-                  {/* Display active symbol if the date is after today */}
+          {bookings.length > 0 && (
+            <table className="table table-striped">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Hall Booked</th>
+                  <th>Date</th>
+                  <th>Status</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+              </thead>
+              <tbody>
+                {bookings.map((booking) => {
+                  const date = new Date(booking.booked_date);
+                  const formattedDate = date.toLocaleDateString();
+                  const today = new Date();
+                  const isActive = date > today;
+
+                  return (
+                    <tr key={booking.booking_id}>
+                      <td>{booking.booking_id}</td>
+                      <td>{booking.hall_id}</td>
+                      <td>{formattedDate}</td>
+                      <td>{isActive ? "✔️ Active" : "❌ Expired"} </td>{" "}
+                      {/* Display active symbol if the date is after today */}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
     </>
   );
 }

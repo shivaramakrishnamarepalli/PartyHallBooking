@@ -19,6 +19,7 @@ import Navbar1 from "./components/Navbar";
 import SpecificAdminCard from "./components/SpecificAdminCard";
 import Footer from "./components/Footer";
 import Contactus from "./components/Contactus";
+import AboutPage from "./components/About";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           {/* <Route path="/home" element={<Home />} /> */}
           {/* common routes */}
           <Route path="/contact" element={<Contactus />} />
+          <Route path="/about" element={<AboutPage />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
