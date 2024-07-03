@@ -107,6 +107,7 @@ function SpecificAdminCard() {
     // if (!confirm("Do you want to confirm the delete?")) return;
 
     const token = localStorage.getItem("token");
+    console.log(id);
     await axios
       .post(
         `http://localhost:3006/api/admin/deleteHall`,
@@ -186,9 +187,9 @@ function SpecificAdminCard() {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary m-1" onClick={HandleEditHall}>
+        {/* <button className="btn btn-primary m-1" onClick={HandleEditHall}>
           Edit Hall
-        </button>
+        </button> */}
         <button className="btn btn-danger m-1" onClick={HandleDeleteHall}>
           Delete Hall
         </button>
