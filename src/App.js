@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import HomeComponent from "./components/HomeComponent";
 import CenterSpecificHall from "./components/CenterSpecificHall";
 import Home from "./components/Home";
+import ProtectedRouteUser from "./components/ProtectedRouteUser";
 import UserBookings from "./components/UserBookings";
 import RoleSelection from "./components/RoleSelection";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -42,9 +43,21 @@ function App() {
           <Route path="*" element={<>default page</>} />
 
           {/* user routes */}
-          <Route path="/user/home" element={<HomeComponent />} />
-          <Route path="/user/hall/:id" element={<CenterSpecificHall />} />
-          <Route path="/user/bookings" element={<UserBookings />} />
+          <Route
+            path="/user/*"
+            element={
+              <ProtectedRouteUser>
+                <Routes>
+                  {/* <Route path="admin/home" element={<Home/>}/> */}
+                  <Route path="home" element={<HomeComponent />} />
+          <Route path="hall/:id" element={<CenterSpecificHall />} />
+          <Route path="bookings" element={<UserBookings />} />
+                  {/* //problem */}
+                </Routes>
+              </ProtectedRouteUser>
+            }
+          />
+          
 
           {/* admin routes */}
           <Route path="/profile" element={<ViewProfile />} />

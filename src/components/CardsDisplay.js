@@ -40,8 +40,10 @@ function CardsDisplay() {
         className="search-input p-1 rounded m-2 "
       />
       <div className="card-container ">
-        {filteredHalls.map((hall) => (
-          <CardComponent
+        {filteredHalls.map((hall) => {
+          if(hall.status === "not available" ) return <></>
+        
+           return <CardComponent
             key={hall.hall_id}
             name={hall.hall_name}
             address={hall.hall_address}
@@ -52,7 +54,7 @@ function CardsDisplay() {
             id={hall.hall_id}
             imageData={hall.hall_image}
           />
-        ))}
+})}
       </div>
     </div>
   );

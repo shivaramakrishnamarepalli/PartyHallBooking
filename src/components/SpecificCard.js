@@ -34,6 +34,7 @@ function SpecificCard() {
   }, [id]);
 
   if (!hall) {
+    console.log(hall)
     return <div>Loading...</div>;
   }
 

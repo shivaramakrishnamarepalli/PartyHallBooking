@@ -24,7 +24,7 @@ const HallForm = () => {
     hall_id: "",
     hall_name: "",
     hall_address: "",
-    admin_id: "",
+    admin_id: `${localStorage.getItem('user_id')}`,
     status: "",
     hall_rental_cost: "",
     hall_max_capacity: "",
@@ -54,7 +54,13 @@ const HallForm = () => {
     // Reset error message when user starts typing
     setErrors({ ...errors, [name]: "" });
   };
-
+  const handleChange1 = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -264,7 +270,8 @@ const HallForm = () => {
                         id="admin_id"
                         name="admin_id"
                         onChange={handleChange}
-                        value={formData.admin_id}
+                        readOnly
+                        value={localStorage.getItem("user_id")}
                         style={{
                           backgroundColor: "rgba(255, 255, 255, 0.8)",
                         }}
@@ -314,7 +321,7 @@ const HallForm = () => {
 
                     <div className="form-group col-md-6 p-1">
                       <label htmlFor="status">Status</label>
-                      <input
+                      {/* <input
                         type="text"
                         className="form-control"
                         id="status"
@@ -324,7 +331,21 @@ const HallForm = () => {
                         style={{
                           backgroundColor: "rgba(255, 255, 255, 0.8)",
                         }}
-                      />
+                      /> */}
+                      <br></br>
+                      <select
+          className="form-control"
+          id="status"
+          name="status"
+          value={formData.status}
+          onChange={handleChange1}
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+          }}
+        >
+          <option value="available">available</option>
+          <option value="not available">not available</option>
+        </select>
                       {errors.status && (
                         <small className="text-danger">{errors.status}</small>
                       )}
