@@ -394,6 +394,39 @@ export default function ViewProfile() {
     }
   };
 
+  const handleSubmit1 = async (e) => {
+    e.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length === 0) {
+      try {
+        const userId = localStorage.getItem("user_id");
+        if (!userId) {
+          throw new Error("User ID not found in localStorage");
+        }
+        const token = localStorage.getItem("token");
+        const response = await axios.put(
+          `http://localhost:3006/api/user/editProfile/${userId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          alert("Profile updated successfully!");
+          setEditMode(false);
+          window.location.reload(true);
+        }
+      } catch (error) {
+        console.error("Error updating profile:", error.message);
+      }
+    } else {
+      setErrors(errors);
+    }
+  };
+
   function handleEdit() {
     setEditMode(!editMode);
   }
@@ -477,7 +510,7 @@ export default function ViewProfile() {
         </div>
       )}
 
-      {editMode && (
+      {editMode && !isUser && (
         <div className="container mt-4">
           <h1 className="mb-4">Edit Profile</h1>
           <form onSubmit={handleSubmit}>
@@ -519,8 +552,88 @@ export default function ViewProfile() {
                 id="email"
                 name="email"
                 value={formData.email}
+                // onChange={handleChange}
+                readOnly
+              />
+              {errors.email && (
+                <div className="text-danger">{errors.email}</div>
+              )}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="mobileNumber" className="form-label">
+                Mobile Number
+              </label>
+              <input
+                type="tel"
+                className="form-control"
+                id="mobileNumber"
+                name="mobileNumber"
+                value={formData.mobileNumber}
                 onChange={handleChange}
                 required
+              />
+              {errors.mobileNumber && (
+                <div className="text-danger">{errors.mobileNumber}</div>
+              )}
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Update
+            </button>
+            <button
+              type="button"
+              onClick={handleEdit}
+              className="btn btn-secondary ms-2"
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
+
+      {editMode && isUser && (
+        <div className="container mt-4">
+          <h1 className="mb-4">Edit Profile</h1>
+          <form onSubmit={handleSubmit1}>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              {errors.name && <div className="text-danger">{errors.name}</div>}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="id" className="form-label">
+                ID
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="id"
+                name="id"
+                value={user?.user_id || ""}
+                readOnly
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                value={formData.email}
+                // onChange={handleChange}
+                readOnly
               />
               {errors.email && (
                 <div className="text-danger">{errors.email}</div>
