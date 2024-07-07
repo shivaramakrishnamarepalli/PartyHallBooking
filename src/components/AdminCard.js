@@ -8,7 +8,15 @@ import { IoPerson } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-function AdminCard({ id, name, address, rental_cost, rating, capacity }) {
+function AdminCard({
+  id,
+  name,
+  address,
+  rental_cost,
+  rating,
+  capacity,
+  reviews,
+}) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/admin/hall/${id}`);
@@ -56,8 +64,9 @@ function AdminCard({ id, name, address, rental_cost, rating, capacity }) {
             <span>
               <h5>
                 <img src={rating1} width={"22rem"} alt="rating" />
-                <span> {rating}</span>
+                {reviews !== 0 && <span> {rating}</span>}
               </h5>
+              {reviews !== 0 && <h6>{reviews} Reviews</h6>}
             </span>
           </div>
           <div>

@@ -8,6 +8,7 @@ function SpecificAdminCard() {
   const [bookedDate, setBookedDate] = useState("");
   const [numGuests, setNumGuests] = useState("");
   const [eventType, setEventType] = useState("");
+  const [reviews, setReviews] = useState({ avg_rating: 0, reviews: [] });
 
   const [hall, setHall] = useState(null);
   const { id } = useParams();
@@ -30,7 +31,25 @@ function SpecificAdminCard() {
       }
     }
 
+    async function getReviews() {
+      const token = localStorage.getItem("token"); // Retrieve the token from local storage
+      try {
+        const response = await axios.get(
+          `http://localhost:3006/api/user/review/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setReviews(response.data);
+      } catch (error) {
+        console.log("Error fetching hall details: ", error);
+      }
+    }
+
     getHall();
+    getReviews();
   }, [id]);
 
   if (!hall) {
@@ -193,6 +212,21 @@ function SpecificAdminCard() {
         <button className="btn btn-danger m-1" onClick={HandleDeleteHall}>
           Delete Hall
         </button>
+        <div>
+          <h3>Hall rating : {reviews.avg_rating}</h3>
+          <h4>reviews</h4>
+          {reviews.reviews.length === 0 && <p>No reviews</p>}
+          {reviews.reviews.map((rev) => (
+            <div key={rev.user_id}>
+              @{rev.user_id}
+              <p>
+                rating : {rev.rating}
+                <br></br>comment : {rev.comment}
+              </p>
+              <br></br>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

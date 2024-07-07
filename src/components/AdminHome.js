@@ -64,6 +64,7 @@ function AdminHome() {
                 admin={hall.admin_id}
                 rental_cost={hall.hall_rental_cost}
                 rating={hall.hall_rating}
+                reviews={hall.reviews}
                 capacity={hall.hall_max_capacity}
                 id={hall.hall_id}
                 imageData={hall.hall_image}

@@ -41,20 +41,23 @@ function CardsDisplay() {
       />
       <div className="card-container ">
         {filteredHalls.map((hall) => {
-          if(hall.status === "not available" ) return <></>
-        
-           return <CardComponent
-            key={hall.hall_id}
-            name={hall.hall_name}
-            address={hall.hall_address}
-            admin={hall.admin_id}
-            rental_cost={hall.hall_rental_cost}
-            rating={hall.hall_rating}
-            capacity={hall.hall_max_capacity}
-            id={hall.hall_id}
-            imageData={hall.hall_image}
-          />
-})}
+          if (hall.status === "not available") return <></>;
+
+          return (
+            <CardComponent
+              key={hall.hall_id}
+              name={hall.hall_name}
+              address={hall.hall_address}
+              admin={hall.admin_id}
+              rental_cost={hall.hall_rental_cost}
+              rating={hall.hall_rating}
+              reviews={hall.reviews}
+              capacity={hall.hall_max_capacity}
+              id={hall.hall_id}
+              imageData={hall.hall_image}
+            />
+          );
+        })}
       </div>
     </div>
   );

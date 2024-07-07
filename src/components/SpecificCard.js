@@ -10,6 +10,10 @@ function SpecificCard() {
   const [eventType, setEventType] = useState("");
 
   const [hall, setHall] = useState(null);
+  const [reviews, setReviews] = useState({ avg_rating: 0, reviews: [] });
+
+  const [rating, setRating] = useState("");
+  const [comment, setComment] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
@@ -30,11 +34,46 @@ function SpecificCard() {
       }
     }
 
+    async function getReviews() {
+      const token = localStorage.getItem("token"); // Retrieve the token from local storage
+      try {
+        const response = await axios.get(
+          `http://localhost:3006/api/user/review/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setReviews(response.data);
+      } catch (error) {
+        console.log("Error fetching hall details: ", error);
+      }
+    }
+
     getHall();
+    getReviews();
   }, [id]);
 
+  async function getReviews() {
+    const token = localStorage.getItem("token"); // Retrieve the token from local storage
+    try {
+      const response = await axios.get(
+        `http://localhost:3006/api/user/review/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setReviews(response.data);
+    } catch (error) {
+      console.log("Error fetching hall details: ", error);
+    }
+  }
+
   if (!hall) {
-    console.log(hall)
+    console.log(hall);
     return <div>Loading...</div>;
   }
 
@@ -103,6 +142,67 @@ function SpecificCard() {
         // console.log(alert("Booking failed"));
       });
   };
+
+  const handleSubmitReview = async (event) => {
+    event.preventDefault();
+    console.log("Rating:", rating);
+    console.log(
+      "Comment:",
+      comment,
+      " id ",
+      id,
+      " user ",
+      localStorage.getItem("user_id")
+    );
+    const token = localStorage.getItem("token"); // Retrieve the token from local storage
+    await axios
+      .post(
+        `http://localhost:3006/api/user/review`,
+        {
+          hall_id: id,
+          user_id: localStorage.getItem("user_id"),
+          rating,
+          comment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        getReviews();
+      })
+      .catch((err) => {
+        alert("A user can add only one review");
+      });
+    // Add form submission logic here
+  };
+
+  async function deleteReview() {
+    console.log("delete rev");
+    const token = localStorage.getItem("token"); // Retrieve the token from local storage
+    await axios
+      .post(
+        `http://localhost:3006/api/user/deleteReview`,
+        {
+          hall_id: id,
+          id: localStorage.getItem("user_id"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("deleted");
+        getReviews();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <div className="container-fluid mt-5 p-5">
@@ -213,7 +313,57 @@ function SpecificCard() {
           {/* //new */}
         </form>
       </div>
-      <div id="Reviews"></div>
+      <div id="Reviews">
+        <h3>Add a review : </h3>
+        <form onSubmit={handleSubmitReview}>
+          <label>
+            Rating:
+            <select
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Select rating
+              </option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+          <br />
+          <label>
+            Comment:
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+        <div>
+          <h3>Hall rating : {reviews.avg_rating}</h3>
+          <h4>reviews</h4>
+          {reviews.reviews.length === 0 && <p>No reviews</p>}
+          {reviews.reviews.map((rev) => (
+            <div key={rev.user_id}>
+              @{rev.user_id}
+              <p>
+                rating : {rev.rating}
+                <br></br>comment : {rev.comment}
+                {localStorage.getItem("user_id") === rev.user_id && (
+                  <button onClick={deleteReview}>Delete Review</button>
+                )}
+              </p>
+              <br></br>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
