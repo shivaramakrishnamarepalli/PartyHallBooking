@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import axios from "axios";
+// import StarRating from "./StarRating";
 
 function SpecificCard() {
   const navigate = useNavigate();
@@ -264,104 +265,127 @@ function SpecificCard() {
           </div>
         </div>
       </div>
-      <div id="book-now" className="container">
-        <h3>Book Your Hall Now!!</h3>
-        <form onSubmit={(e) => bookHall(e)}>
-          <label className="booked-date p-2 form-label">
-            Booked Date:
-            <input
-              type="date"
-              value={bookedDate}
-              onChange={(e) => setBookedDate(e.target.value)}
-              required
-              className="m-1 form-control full-width"
-            />
-          </label>
-          <label className="p-2 form-label">
-            Number of Guests:
-            <input
-              type="number"
-              value={numGuests}
-              onChange={(e) => setNumGuests(e.target.value)}
-              required
-              className="m-1 form-control full-width"
-            />
-          </label>
-          <label className="p-2 form-label">
-            Event Type:
-            <input
-              type="text"
-              value={eventType}
-              onChange={(e) => setEventType(e.target.value)}
-              required
-              className="m-1 form-control full-width"
-            />
-          </label>
-          {/* //new */}
-          <label className="p-2 form-label">
-            Amount
-            <input
-              type="number"
-              readOnly
-              value={hall.hall_rental_cost}
-              className="m-1 form-control full-width"
-            />
-          </label>
 
-          {/* <input type="submit" value="Submit" className="btn btn-primary m-1 "/> */}
-          <Button className="btn-success">Book hall</Button>
-          {/* //new */}
-        </form>
-      </div>
-      <div id="Reviews">
-        <h3>Add a review : </h3>
-        <form onSubmit={handleSubmitReview}>
-          <label>
-            Rating:
-            <select
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-              required
-            >
-              <option value="" disabled>
-                Select rating
-              </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </label>
-          <br />
-          <label>
-            Comment:
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <button type="submit">Submit</button>
-        </form>
-        <div>
-          <h3>Hall rating : {reviews.avg_rating}</h3>
-          <h4>reviews</h4>
-          {reviews.reviews.length === 0 && <p>No reviews</p>}
-          {reviews.reviews.map((rev) => (
-            <div key={rev.user_id}>
-              @{rev.user_id}
-              <p>
-                rating : {rev.rating}
-                <br></br>comment : {rev.comment}
-                {localStorage.getItem("user_id") === rev.user_id && (
-                  <button onClick={deleteReview}>Delete Review</button>
-                )}
-              </p>
-              <br></br>
+      <div className="d-flex">
+        <div className="container m-3">
+          <div id="book-now" className="container-fluid">
+            <h3>Book Your Hall Now!!</h3>
+            <form onSubmit={(e) => bookHall(e)}>
+              <label className="booked-date p-2 form-label">
+                Booked Date:
+                <input
+                  type="date"
+                  value={bookedDate}
+                  onChange={(e) => setBookedDate(e.target.value)}
+                  required
+                  className="m-1 form-control full-width"
+                />
+              </label>
+              <label className="p-2 form-label">
+                Number of Guests:
+                <input
+                  type="number"
+                  value={numGuests}
+                  onChange={(e) => setNumGuests(e.target.value)}
+                  required
+                  className="m-1 form-control full-width"
+                />
+              </label>
+              <label className="p-2 form-label">
+                Event Type:
+                <input
+                  type="text"
+                  value={eventType}
+                  onChange={(e) => setEventType(e.target.value)}
+                  required
+                  className="m-1 form-control full-width"
+                />
+              </label>
+              {/* //new */}
+              <label className="p-2 form-label">
+                Amount
+                <input
+                  type="number"
+                  readOnly
+                  value={hall.hall_rental_cost}
+                  className="m-1 form-control full-width"
+                />
+              </label>
+
+              {/* <input type="submit" value="Submit" className="btn btn-primary m-1 "/> */}
+              <Button className="btn-success">Book hall</Button>
+              {/* //new */}
+            </form>
+          </div>
+        </div>
+
+        <div id="Reviews" className="container-fluid m-4">
+          <h3>Post your Review !!</h3>
+          <form onSubmit={handleSubmitReview} className="review-form m-3">
+            <div className="form-group">
+              <label htmlFor="rating">Rating:</label>
+              <select
+                id="rating"
+                className="form-control"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                required
+              >
+                <option value="" disabled>
+                  Select rating
+                </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
             </div>
-          ))}
+            <div className="form-group">
+              <label htmlFor="comment">Comment:</label>
+              <textarea
+                id="comment"
+                className="form-control"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows=""
+                required
+              ></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+          <div className="container-fluid">
+            <div className="card mt-4">
+              <div className="card-body">
+                <h3 className="card-title">
+                  Hall rating: {reviews.avg_rating}
+                </h3>
+                <h4 className="card-subtitle mb-3">Reviews</h4>
+                {reviews.reviews.length === 0 && <p>No reviews</p>}
+                {reviews.reviews.map((rev) => (
+                  <div key={rev.user_id} className="card review-item mb-3">
+                    <div className="card-header d-flex justify-content-between align-items-center">
+                      <span>@{rev.user_id}</span>
+                      {localStorage.getItem("user_id") === rev.user_id && (
+                        <button
+                          onClick={deleteReview}
+                          className="btn btn-sm btn-danger"
+                        >
+                          Delete Review
+                        </button>
+                      )}
+                    </div>
+                    <div className="card-body">
+                      <p className="card-text">Rating: {rev.rating}</p>
+                      <p className="card-text">Comment: {rev.comment}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

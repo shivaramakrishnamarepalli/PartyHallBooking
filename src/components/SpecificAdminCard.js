@@ -212,20 +212,25 @@ function SpecificAdminCard() {
         <button className="btn btn-danger m-1" onClick={HandleDeleteHall}>
           Delete Hall
         </button>
-        <div>
-          <h3>Hall rating : {reviews.avg_rating}</h3>
-          <h4>reviews</h4>
-          {reviews.reviews.length === 0 && <p>No reviews</p>}
-          {reviews.reviews.map((rev) => (
-            <div key={rev.user_id}>
-              @{rev.user_id}
-              <p>
-                rating : {rev.rating}
-                <br></br>comment : {rev.comment}
-              </p>
-              <br></br>
+        <div className="container-fluid mb-3">
+          <div className="card mt-4">
+            <div className="card-body">
+              <h3 className="card-title">Hall rating: {reviews.avg_rating}</h3>
+              <h4 className="card-subtitle mb-3">Reviews</h4>
+              {reviews.reviews.length === 0 && <p>No reviews</p>}
+              {reviews.reviews.map((rev) => (
+                <div key={rev.user_id} className="card review-item mb-3">
+                  <div className="card-header d-flex justify-content-between align-items-center">
+                    <span>@{rev.user_id}</span>
+                    <div className="star-rating">{rev.rating}</div>
+                  </div>
+                  <div className="card-body">
+                    <p className="card-text">Comment: {rev.comment}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </>
