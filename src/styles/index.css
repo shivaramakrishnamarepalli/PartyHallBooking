@@ -1,0 +1,45 @@
+.card-hover:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add your desired box shadow */
+  transform: translateY(-2px); /* Add your desired transformation */
+}
+body {
+  background-color: white;
+}
+
+::selection {
+  color: greenyellow;
+  background-color: black;
+}
+.custom-login-btn {
+  background-color: gray;
+  color: white;
+}
+
+.custom-login-btn:hover {
+  background-color: darkblue;
+  border-color: rgb(9, 133, 181);
+  color: white;
+}
+
+.navbar-nav .nav-link {
+  transition: color 0.3s ease; /* Apply transition for color change */
+}
+
+footer {
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%;
+  box-shadow: 0 -4px 2px -2px gray;
+  position: fixed;
+  bottom: 0;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ff0000; /* Change color on hover */
+}
+
+.nav-link.active:hover {
+  text-decoration: underline;
+  color: black;
+}

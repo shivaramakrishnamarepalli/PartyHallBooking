@@ -1,0 +1,22 @@
+.card-container {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 576px) { /* Small devices (576px and up) */
+  .card-container {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) { /* Medium devices (768px and up) */
+  .card-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) { /* Large devices (992px and up) */
+  .card-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

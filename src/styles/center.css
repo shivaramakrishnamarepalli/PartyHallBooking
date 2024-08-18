@@ -1,0 +1,13 @@
+container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    padding: 20px ;
+  }
+ 
+  .container.card {
+    border: 2px solid #f5f0f0; 
+    max-width: 1400px; 
+    margin-top: 100px
+  }
