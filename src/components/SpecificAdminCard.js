@@ -146,7 +146,7 @@ function SpecificAdminCard() {
   }
 
   async function HandleEditHall() {
-    console.log("edit");
+    navigate(`/admin/editHall/${id}`);
   }
 
   return (
@@ -206,9 +206,9 @@ function SpecificAdminCard() {
             </div>
           </div>
         </div>
-        {/* <button className="btn btn-primary m-1" onClick={HandleEditHall}>
+        <button className="btn btn-primary m-1" onClick={HandleEditHall}>
           Edit Hall
-        </button> */}
+        </button>
         <button className="btn btn-danger m-1" onClick={HandleDeleteHall}>
           Delete Hall
         </button>

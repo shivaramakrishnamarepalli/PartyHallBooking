@@ -24,11 +24,11 @@ const HallForm = () => {
     hall_id: "",
     hall_name: "",
     hall_address: "",
-    admin_id: `${localStorage.getItem('user_id')}`,
-    status: "",
+    admin_id: `${localStorage.getItem("user_id")}`,
+    status: "available",
     hall_rental_cost: "",
     hall_max_capacity: "",
-    hall_price_plate: "",
+    hall_price_per_plate: "",
     hall_duration: "24",
     hall_rating: "0",
     // hall_image: "",
@@ -42,7 +42,7 @@ const HallForm = () => {
     status: "",
     hall_rental_cost: "",
     hall_max_capacity: "",
-    hall_price_plate: "",
+    hall_price_per_plate: "",
     hall_duration: "24",
     hall_rating: "0",
     // hall_image: "",
@@ -334,18 +334,18 @@ const HallForm = () => {
                       /> */}
                       <br></br>
                       <select
-          className="form-control"
-          id="status"
-          name="status"
-          value={formData.status}
-          onChange={handleChange1}
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-          }}
-        >
-          <option value="available">available</option>
-          <option value="not available">not available</option>
-        </select>
+                        className="form-control"
+                        id="status"
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange1}
+                        style={{
+                          backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      >
+                        <option value="available">available</option>
+                        <option value="not available">not available</option>
+                      </select>
                       {errors.status && (
                         <small className="text-danger">{errors.status}</small>
                       )}
@@ -389,21 +389,23 @@ const HallForm = () => {
                       )}
                     </div>
                     <div className="form-group col-md-6 p-1">
-                      <label htmlFor="hall_price_plate">Price per Plate</label>
+                      <label htmlFor="hall_price_per_plate">
+                        Price per Plate
+                      </label>
                       <input
                         type="text"
                         className="form-control"
-                        id="hall_price_plate"
-                        name="hall_price_plate"
+                        id="hall_price_per_plate"
+                        name="hall_price_per_plate"
                         onChange={handleChange}
-                        value={formData.hall_price_plate}
+                        value={formData.hall_price_per_plate}
                         style={{
                           backgroundColor: "rgba(255, 255, 255, 0.8)",
                         }}
                       />
-                      {errors.hall_price_plate && (
+                      {errors.hall_price_per_plate && (
                         <small className="text-danger">
-                          {errors.hall_price_plate}
+                          {errors.hall_price_per_plate}
                         </small>
                       )}
                     </div>

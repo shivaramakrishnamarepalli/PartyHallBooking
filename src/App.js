@@ -21,6 +21,7 @@ import SpecificAdminCard from "./components/SpecificAdminCard";
 import Footer from "./components/Footer";
 import Contactus from "./components/Contactus";
 import AboutPage from "./components/About";
+import EditHall from "./components/EditHall";
 
 function App() {
   return (
@@ -50,14 +51,13 @@ function App() {
                 <Routes>
                   {/* <Route path="admin/home" element={<Home/>}/> */}
                   <Route path="home" element={<HomeComponent />} />
-          <Route path="hall/:id" element={<CenterSpecificHall />} />
-          <Route path="bookings" element={<UserBookings />} />
+                  <Route path="hall/:id" element={<CenterSpecificHall />} />
+                  <Route path="bookings" element={<UserBookings />} />
                   {/* //problem */}
                 </Routes>
               </ProtectedRouteUser>
             }
           />
-          
 
           {/* admin routes */}
           <Route path="/profile" element={<ViewProfile />} />
@@ -69,6 +69,7 @@ function App() {
                   {/* <Route path="admin/home" element={<Home/>}/> */}
                   <Route path="addHall" element={<HallForm />} />
                   <Route path="home" element={<AdminHome />} />
+                  <Route path="editHall/:id" element={<EditHall />} />
                   <Route path="" element={<AdminHome />} />
                   <Route path="/hall/:id" element={<SpecificAdminCard />} />
                   {/* //problem */}
